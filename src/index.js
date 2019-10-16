@@ -27,16 +27,19 @@ import {
 import {
   Hello,
 } from './components/Hello'
+import {
+  RootNavigation,
+} from './navigators'
 
 const App: () => React$Node = () => {
   return (
-    <>
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <Hello name={'jihun'} />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Hello name={'jihun'} />
           <Header />
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
@@ -73,11 +76,15 @@ const App: () => React$Node = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+      <RootNavigation />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
