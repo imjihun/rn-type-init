@@ -24,6 +24,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {
+  Hello,
+} from './components/Hello'
+
 const App: () => React$Node = () => {
   return (
     <>
@@ -32,6 +36,7 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
+          <Hello name={'jihun'} />
           <Header />
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
