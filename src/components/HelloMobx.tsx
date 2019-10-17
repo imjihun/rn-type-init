@@ -1,21 +1,20 @@
-// components/Hello.tsx
-import React from 'react';
+// components/HelloMobx.tsx
+import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-const Hello: React.FC<Props> = (props) => {
-  console.log('jhlim Hello render')
+const HelloMobx: React.FC<Props> = (props) => {
+  console.log('jhlim HelloMobx render')
+  const onIncrement = () => props.setDebug(props.debug + 1);
+  const onDecrement = () => props.setDebug(props.debug === 0 ? 0 : props.debug - 1);
 
-  const [enthusiasmLevel, setEnthusiasmLevel] = React.useState(props.enthusiasmLevel);
+  const getExclamationMarks = (numChars: number) => numChars > -1 && Array(numChars + 1).join('!');
 
-  const onIncrement = () => setEnthusiasmLevel((enthusiasmLevel || 0) + 1);
-  const onDecrement = () => setEnthusiasmLevel((enthusiasmLevel || 0) - 1);
-
-  const getExclamationMarks = (numChars: number) => Array(numChars + 1).join('!');
+  useEffect(() => console.log('jhlim HelloMobx effect'))
   return (
     <View style={styles.root}>
       <Text style={styles.greeting}>
         Hello{' '}
-        {props.name + getExclamationMarks(enthusiasmLevel || 0)}
+        {'mobx' + getExclamationMarks(props.debug || 0)}
       </Text>
 
       <View style={styles.buttons}>
@@ -66,8 +65,8 @@ const styles = StyleSheet.create({
 
 
 export interface Props {
-  name: string;
-  enthusiasmLevel?: number;
+  debug: number,
+  setDebug: (value: number) => void,
 }
 
-export default Hello
+export default HelloMobx
