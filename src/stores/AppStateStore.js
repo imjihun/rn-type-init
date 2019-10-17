@@ -20,4 +20,8 @@ export default class AppStateStore {
     this.isLoading = false
   }
 
+  initAfterHydrate() {
+
+  }
+
 }

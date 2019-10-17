@@ -20,29 +20,28 @@ import {
   Store,
 } from './stores';
 import {
-  Provider,
   observer,
+  Provider,
+  MobXProviderContext,
 } from 'mobx-react'
 
-const App: () => React$Node = () => {
+const App: React.FC<{}> = () => {
   const [store, setStore] = useState()
-  // let store = null
   useEffect(() => {
-    setStore(new Store())
-    // store = new Store(() => console.log('jhlim Store finish'))
-    console.log('jhlim App useEffect', store)
+    const store = new Store()
+    setStore(store)
+    console.log('jhlim App useEffect')
   }, []);
   console.log('jhlim App render')
   return (
     <View style={[styles.container]}>
-      {
-        store && store.appStateStore && store.appStateStore.isMountedApp &&
-        <Provider store={store}>
+      {store && store.appStateStore && store.appStateStore.isMountedApp &&
+        <Provider {...store}>
           <StatusBar barStyle="dark-content" />
           <RootNavigation />
-        </Provider> || null
+        </Provider>
       }
-    </View>
+    </View >
   )
 };
 
@@ -53,3 +52,6 @@ const styles = StyleSheet.create({
 })
 
 export default observer(App);
+export function useStores(): Store {
+  return React.useContext(MobXProviderContext)
+}

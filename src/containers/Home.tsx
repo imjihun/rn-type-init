@@ -27,13 +27,17 @@ import {
   HelloMobx,
 } from '../components';
 
-const Home: React.FC<Props> = (props) => {
+import {
+  observer,
+} from 'mobx-react';
+import {
+  useStores,
+} from '../';
+
+const Home: React.FC = observer((props) => {
   console.log('jhlim Home render')
+  const { appStateStore } = useStores()
 
-  const { store } = props
-  const { appStateStore } = store
-
-  const MyHelloMobx = observer(HelloMobx)
   return (
     <View style={styles.container}>
       <Hello name={'jihun'} />
@@ -73,7 +77,7 @@ const Home: React.FC<Props> = (props) => {
       </ScrollView>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -137,17 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-import {
-  inject,
-  observer,
-} from 'mobx-react';
-import {
-  Store
-} from '../stores';
-
-export interface Props {
-  store: Store;
-}
-
-export default inject('store')(observer(Home));
+export default Home;
