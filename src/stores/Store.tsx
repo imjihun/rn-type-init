@@ -17,6 +17,7 @@ export class Store {
   appStateStore: AppStateStore;
 
   constructor() {
+    console.log('[DEV][LOG][Store][constructor]')
     this._network = new Network(() => '')
 
     this.appStateStore = new AppStateStore(this, this._network)
@@ -25,7 +26,7 @@ export class Store {
   }
 
   async hydrate() {
-    console.log('[DEV][LOG][Store][hydrate] start')
+    console.log('[DEV][LOG][Store][hydrate]')
     const hydrate = create({ storage: AsyncStorage })
     await hydrate('appStateStore', this.appStateStore)
     await this.appStateStore.initAfterHydrate()

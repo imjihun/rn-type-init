@@ -18,6 +18,7 @@ import {
 } from './navigators';
 import {
   Store,
+  store,
 } from './stores';
 import {
   observer,
@@ -26,16 +27,13 @@ import {
 } from 'mobx-react'
 
 const App: React.FC<{}> = () => {
-  const [store, setStore] = useState()
   useEffect(() => {
-    const store = new Store()
-    setStore(store)
     console.log('jhlim App useEffect')
   }, []);
   console.log('jhlim App render')
   return (
     <View style={[styles.container]}>
-      {store && store.appStateStore && store.appStateStore.isMountedApp &&
+      {store.appStateStore && store.appStateStore.isMountedApp &&
         <Provider {...store}>
           <StatusBar barStyle="dark-content" />
           <RootNavigation />

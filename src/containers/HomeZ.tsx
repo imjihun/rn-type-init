@@ -33,24 +33,29 @@ import {
 } from 'mobx-react';
 import {
   useStores,
-} from '../';
-import {
-  NavigationStackProp,
-} from 'react-navigation-stack'
+} from '..';
 import { StackActions, NavigationActions } from 'react-navigation';
+import { NavigationStackProp } from 'react-navigation-stack';
 
 export interface Props {
   navigation: NavigationStackProp;
 }
-const Home: React.FC<Props> = observer((props) => {
-  console.log('jhlim Home render')
+const HomeZ: React.FC<Props> = observer((props) => {
+  console.log('jhlim HomeZ render')
   const { appStateStore } = useStores()
 
   return (
     <View style={styles.container}>
       <Hello name={'jihun'} />
       <HelloMobx debug={appStateStore.debug} setDebug={(value) => appStateStore.debug = value} />
-      <TouchableOpacity onPress={() => props.navigation.navigate('HomeZ')}><Text>{'다른스크린'}</Text></TouchableOpacity>
+      <TouchableOpacity onPress={() => {
+        let resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'Home' })]
+        });
+
+        props.navigation.dispatch(resetAction);
+      }}><Text>{'다른스크린'}</Text></TouchableOpacity>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
@@ -150,4 +155,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeZ;
