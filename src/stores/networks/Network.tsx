@@ -2,11 +2,11 @@
 // import {
 //   axiosApi,
 // } from '../../utils'
-const axiosApi = (url: any, method: any, data: any, _options: any) => { }
+const axiosApi = async (url: string, method: 'GET' | 'POST' | 'PUT' | 'UPDATE' | 'DELETE', data: any, _options: any) => { }
 
 export class Network {
-  _axiosApi = axiosApi
-  _axiosApiAuth = axiosApi
+  _axiosApi: (url: string, method: 'GET' | 'POST' | 'PUT' | 'UPDATE' | 'DELETE', data: any, _options: any) => Promise<any> = axiosApi
+  _axiosApiAuth: (url: string, method: 'GET' | 'POST' | 'PUT' | 'UPDATE' | 'DELETE', data: any, _options: any) => Promise<any> = axiosApi
 
   constructor(getJwt: () => '') {
     this.createAxiosApiAuth(getJwt)
