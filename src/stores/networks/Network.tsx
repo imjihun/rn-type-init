@@ -8,12 +8,12 @@ export class Network {
   _axiosApi: (url: string, method: 'GET' | 'POST' | 'PUT' | 'UPDATE' | 'DELETE', data: any, _options: any) => Promise<any> = axiosApi
   _axiosApiAuth: (url: string, method: 'GET' | 'POST' | 'PUT' | 'UPDATE' | 'DELETE', data: any, _options: any) => Promise<any> = axiosApi
 
-  constructor(getJwt: () => '') {
+  constructor(getJwt: () => string) {
     this.createAxiosApiAuth(getJwt)
 
   }
 
-  createAxiosApiAuth = (getJwt: () => '') => {
+  createAxiosApiAuth = (getJwt: () => string) => {
     this._axiosApiAuth = async (url, method = 'GET', data, options) => {
       const jwtToken = getJwt && getJwt() || ''
       const _options = { ...options, headers: { Authorization: jwtToken, ...(options && typeof options['headers'] === 'object' ? options['headers'] : {}) }, }
