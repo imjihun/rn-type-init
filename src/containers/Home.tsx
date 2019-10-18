@@ -14,6 +14,12 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import {
+  observer,
+} from 'mobx-react';
+import {
+  NavigationStackProp,
+} from 'react-navigation-stack';
 
 import {
   Header,
@@ -29,22 +35,15 @@ import {
 } from '../components';
 
 import {
-  observer,
-} from 'mobx-react';
-import {
-  useStores,
-} from '../';
-import {
-  NavigationStackProp,
-} from 'react-navigation-stack'
-import { StackActions, NavigationActions } from 'react-navigation';
+  useStore,
+} from '../stores';
 
 export interface Props {
   navigation: NavigationStackProp;
 }
-const Home: React.FC<Props> = observer((props) => {
+const Home: React.FC<Props> = (props) => {
   console.log('jhlim Home render')
-  const { appStateStore } = useStores()
+  const { appStateStore } = useStore()
 
   return (
     <View style={styles.container}>
@@ -86,7 +85,7 @@ const Home: React.FC<Props> = observer((props) => {
       </ScrollView>
     </View>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -150,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default observer(Home);
