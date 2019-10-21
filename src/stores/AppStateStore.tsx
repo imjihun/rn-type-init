@@ -26,4 +26,10 @@ export default class AppStateStore {
 
   }
 
+  async clear() {
+    this.appIdentifier = ''
+    this.isMountedApp = false
+    this.isLoading = false
+  }
+
 }

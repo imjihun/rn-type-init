@@ -16,14 +16,12 @@ import {
 } from 'react-native';
 import {
   observer,
+  inject,
 } from 'mobx-react';
 import {
   StackActions,
   NavigationActions,
 } from 'react-navigation';
-import {
-  NavigationStackProp,
-} from 'react-navigation-stack';
 
 import {
   Header,
@@ -39,15 +37,13 @@ import {
 } from '../components';
 
 import {
-  useStore,
-} from '../stores';
+  StackProps,
+} from './Props'
 
-export interface Props {
-  navigation: NavigationStackProp;
-}
-const HomeZ: React.FC<Props> = (props) => {
+
+const HomeZ: React.FC<StackProps> = (props) => {
   console.log('jhlim HomeZ render')
-  const { appStateStore } = useStore()
+  const { appStateStore } = props.store
 
   return (
     <View style={styles.container}>
@@ -161,4 +157,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default observer(HomeZ);
+export default inject('store')(observer(HomeZ));

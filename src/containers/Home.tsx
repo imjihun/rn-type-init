@@ -16,10 +16,8 @@ import {
 } from 'react-native';
 import {
   observer,
+  inject,
 } from 'mobx-react';
-import {
-  NavigationStackProp,
-} from 'react-navigation-stack';
 
 import {
   Header,
@@ -35,15 +33,13 @@ import {
 } from '../components';
 
 import {
-  useStore,
-} from '../stores';
+  StackProps,
+} from './Props'
 
-export interface Props {
-  navigation: NavigationStackProp;
-}
-const Home: React.FC<Props> = (props) => {
+
+const Home: React.FC<StackProps> = (props) => {
   console.log('jhlim Home render')
-  const { appStateStore } = useStore()
+  const { appStateStore } = props.store
 
   return (
     <View style={styles.container}>
@@ -149,4 +145,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(Home);
+
+export default inject('store')(observer(Home));

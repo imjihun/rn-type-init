@@ -8,46 +8,45 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet,
   View,
   StatusBar,
 } from 'react-native';
 import {
   observer,
+  Provider,
 } from 'mobx-react';
 
 import {
   RootNavigation,
 } from './navigators';
 import {
-  useStore,
+  Store,
 } from './stores';
 
 const App: React.FC<{}> = () => {
-  const { appStateStore } = useStore()
+  const [store, setStore] = useState<Store>()
   useEffect(() => {
-    console.log('jhlim App cdm')
+    const store = new Store()
+    setStore(store)
+    console.log('jhlim App cdm', store)
     return (
-      () => console.log('jhlim App cwum')
+      () => {
+        store && store.clear()
+        console.log('jhlim App cwum', store)
+      }
     )
   }, []);
   console.log('jhlim App render')
-  if (appStateStore && appStateStore.isMountedApp) {
+  if (store && store.appStateStore && store.appStateStore.isMountedApp) {
     return (
-      <View style={[styles.container]}>
+      <Provider {...store}>
         <StatusBar barStyle="dark-content" />
         <RootNavigation />
-      </View>
+      </Provider>
     )
   }
   return <View />
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
 
 
 export default observer(App);
