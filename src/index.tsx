@@ -26,13 +26,13 @@ import {
 const App: React.FC<{}> = () => {
   const [store, setStore] = useState<Store>()
   useEffect(() => {
-    const store = new Store()
-    setStore(store)
-    console.log('jhlim App cdm', store)
+    const _store = new Store()
+    setStore(_store)
+    console.log('jhlim App cdm', _store)
     return (
       () => {
-        store && store.clear()
-        console.log('jhlim App cwum', store)
+        _store && _store.clear()
+        console.log('jhlim App cwum', _store)
       }
     )
   }, []);
