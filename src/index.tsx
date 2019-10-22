@@ -39,7 +39,7 @@ const App: React.FC<{}> = () => {
   console.log('jhlim App render')
   if (store && store.appStateStore && store.appStateStore.isMountedApp) {
     return (
-      <Provider {...store}>
+      <Provider store={store}>
         <StatusBar barStyle="dark-content" />
         <RootNavigation />
       </Provider>
